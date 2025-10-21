@@ -1,4 +1,4 @@
-#最初に
+# 最初に
 １．このdllはUnity用に作成されています。使用する環境を間違えないようにお願いします。
 
 ２．dllを作る際に参照したUnity Editorのバージョンは、6000.0.58f2(LTS)です。
@@ -8,12 +8,12 @@
 
 3. If you would like to read the README document in English, please translate it.
 
-#使用方法
+# 使用方法
 １．このdllを使いたいプロジェクトに、dllをアタッチする。
 ２．呼び出したいスクリプトに、下記の通りの文法で記述する。
 
-###保存
+### 保存
 例）UnitySaveAssist.Save("Key(保存名)","Security_key(暗号化に必要なキー)","originalText(保存したい文字列)");
 
-###読み込み
+### 読み込み
 例）UnitySaveAssist.Load("Key(保存名)","Security_Key(暗号化に必要なキー)");
