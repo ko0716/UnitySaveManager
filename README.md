@@ -9,11 +9,10 @@
 # 使用方法
 １．このdllを使いたいプロジェクトに、dllをアタッチする。
 ２．呼び出したいスクリプトに、下記の通りの文法で記述する。
----C#
-UnitySaveAssist.Save("Key(保存名)","Security_key(暗号化に必要なキー)","originalText(保存したい文字列)");
----
+
+
 ### 保存
-例）
+例）UnitySaveAssist.Save("Key(保存名)","Security_key(暗号化に必要なキー)","originalText(保存したい文字列)");
 
 ### 読み込み
 例）UnitySaveAssist.Load("Key(保存名)","Security_Key(暗号化に必要なキー)");
