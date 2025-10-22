@@ -4,16 +4,16 @@
 ２．dllを作る際に参照したUnity Editorのバージョンは、6000.0.58f2(LTS)です。
 ※セキュリティ脆弱性問題対策済みバージョンを使用しています。
 
-３．個人で使用するために作ったので、コードの作りはよくないかもです。ちなみに、コードの改編などは自由です。詳しくはLicenceというファイルを確認してください。
-
-3. If you would like to read the README document in English, please translate it.
+３．個人で使用するために作ったので、コードの作りはよくないかもです。コードの改編などは自由です。詳しくはLicenceというファイルを確認してください
 
 # 使用方法
 １．このdllを使いたいプロジェクトに、dllをアタッチする。
 ２．呼び出したいスクリプトに、下記の通りの文法で記述する。
-
+---C#
+UnitySaveAssist.Save("Key(保存名)","Security_key(暗号化に必要なキー)","originalText(保存したい文字列)");
+---
 ### 保存
-例）UnitySaveAssist.Save("Key(保存名)","Security_key(暗号化に必要なキー)","originalText(保存したい文字列)");
+例）
 
 ### 読み込み
 例）UnitySaveAssist.Load("Key(保存名)","Security_Key(暗号化に必要なキー)");
