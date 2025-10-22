@@ -22,3 +22,6 @@
 
 ### 読み込み
 例）UnitySaveAssist.Load("Key(保存名)","Security_Key(暗号化に必要なキー)");
+
+## 製作者
+[@ko0716](https://github.com/ko0716)
