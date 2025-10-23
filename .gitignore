@@ -48,6 +48,8 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.gitignore
+*.gitattributes
 
 # Unity3D generated meta files
 *.pidb.meta
