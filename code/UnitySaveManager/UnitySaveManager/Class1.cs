@@ -124,8 +124,11 @@ namespace UnitySaveManager
                 }
                 while (num % 3 != 0);
 
+                //二重暗号化
+                string twoAEStxt = UnitySaveAssist.KeyIssuence(encrypted,num.ToString());
+
                 //識別子を追加
-                encrypted = num.ToString() + encrypted;
+                encrypted = num.ToString() + twoAEStxt;
 
             }
             else if (originalText is string)
@@ -136,8 +139,11 @@ namespace UnitySaveManager
                 }
                 while (num % 4 != 0);
 
+                //二重暗号化
+                string twoAEStxt = UnitySaveAssist.KeyIssuence(encrypted, num.ToString());
+
                 //識別子を追加
-                encrypted = num.ToString() + encrypted;
+                encrypted = num.ToString() + twoAEStxt;
 
             }
             else if (originalText is float)
@@ -148,8 +154,11 @@ namespace UnitySaveManager
                 }
                 while (num % 7 != 0);
 
+                //二重暗号化
+                string twoAEStxt = UnitySaveAssist.KeyIssuence(encrypted, num.ToString());
+
                 //識別子を追加
-                encrypted = num.ToString() + encrypted;
+                encrypted = num.ToString() + twoAEStxt;
             }
 
              //値を返す
@@ -161,8 +170,11 @@ namespace UnitySaveManager
             int prefix = int.Parse(Text.Substring(0, 3));  // 先頭3文字を取得
             string decodetxt = Text.Substring(3); //残りの文字を抽出
 
+            //暗号化された暗号化した文を復元
+            string createdecrypted = UnitySaveAssist.Decode(decodetxt, prefix.ToString());
+
             //データの復元
-            string decrypted = UnitySaveAssist.Decode(decodetxt, security_key);
+            string decrypted = UnitySaveAssist.Decode(createdecrypted, security_key);
 
 
             //適応する型に変換
