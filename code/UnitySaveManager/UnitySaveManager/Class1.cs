@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
+using static System.Net.Mime.MediaTypeNames;
 
 /*
- * CREATED BY ko0716 with AI
+ * CREATED BY Hugu0141 with AI
  * 
  * If you have questions,Please check README.
  */
@@ -43,7 +46,7 @@ namespace UnitySaveManager
                     // Base64で返す
                     return Convert.ToBase64String(ms.ToArray());
 
-                    
+
                 }
             }
         }
@@ -94,7 +97,7 @@ namespace UnitySaveManager
             }
         }
 
-        public static string Encrypt(string security_key,string originalText)
+        public static string Encrypt(string security_key, string originalText)
         {
             string encrypted = UnitySaveAssist.KeyIssuence(originalText, security_key);
             return encrypted;
@@ -102,7 +105,88 @@ namespace UnitySaveManager
 
 
 
-        public static void Save<T>(string key_name,string security_key,T originalText)
+        //暗号化したテキストの取得
+        public static string Create_AES_text(string security_key, dynamic originalText)
+        {
+            //暗号化識別子
+            int num;
+
+            //暗号化
+            string encrypted = UnitySaveAssist.KeyIssuence(originalText.ToString(), security_key);
+
+
+            //型に応じて分岐
+            if (originalText is int)
+            {
+                do
+                {
+                    num = UnityEngine.Random.Range(100, 1000); // 100〜999のランダムな数
+                }
+                while (num % 3 != 0);
+
+                //識別子を追加
+                encrypted = num.ToString() + encrypted;
+
+            }
+            else if (originalText is string)
+            {
+                do
+                {
+                    num = UnityEngine.Random.Range(100, 1000); // 100〜999のランダムな数
+                }
+                while (num % 4 != 0);
+
+                //識別子を追加
+                encrypted = num.ToString() + encrypted;
+
+            }
+            else if (originalText is float)
+            {
+                do
+                {
+                    num = UnityEngine.Random.Range(100, 1000); // 100〜999のランダムな数
+                }
+                while (num % 7 != 0);
+
+                //識別子を追加
+                encrypted = num.ToString() + encrypted;
+            }
+
+             //値を返す
+             return encrypted;
+        }
+
+        public static dynamic Decode_AES_text(string security_key, string Text)
+        {
+            int prefix = int.Parse(Text.Substring(0, 3));  // 先頭3文字を取得
+            string decodetxt = Text.Substring(3); //残りの文字を抽出
+
+            //データの復元
+            string decrypted = UnitySaveAssist.Decode(decodetxt, security_key);
+
+
+            //適応する型に変換
+            if (prefix % 3 == 0)
+            {
+                return int.Parse(decrypted);
+            }
+            else if (prefix % 4 == 0)
+            {
+                return decrypted;
+            }
+            else if (prefix % 7 == 0)
+            { 
+                return float.Parse(decrypted);
+            }
+
+
+            // その他は default を返す（null / 0相当）
+            return default;
+        }
+
+
+
+        public static void Save(string key_name, string security_key, dynamic originalText)
         {
             //originalTextがnullでないことを検証
             if (originalText != null)
@@ -119,14 +203,14 @@ namespace UnitySaveManager
                     }
                     catch
                     {
-                        Debug.LogError("セーブ時にエラーが発生しました。");
+                        UnityEngine.Debug.LogError("セーブ時にエラーが発生しました。");
                     }
                 }
-                
-                
-                
+
+
+
             }
-            
+
         }
 
         public static T Load<T>(string key_name, string security_key)
@@ -153,10 +237,10 @@ namespace UnitySaveManager
                     return (T)(object)float.Parse(decrypted);
                 }
             }
-                
-            catch 
+
+            catch
             {
-                Debug.LogError("読み込みに失敗しました");
+                UnityEngine.Debug.LogError("読み込みに失敗しました");
             }
 
             // その他は default を返す（null / 0相当）
