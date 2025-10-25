@@ -52,7 +52,7 @@ ExportedObj/
 *.gitattributes
 bin/
 obj/
-UnitySaveManager/
+code/
 
 # Unity3D generated meta files
 *.pidb.meta
