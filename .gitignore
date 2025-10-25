@@ -50,7 +50,8 @@ ExportedObj/
 *.cs
 *.VC.db
 bin/
-obj/
+/obj/
+/bin/
 
 # Unity3D generated meta files
 *.pidb.meta
